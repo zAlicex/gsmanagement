@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Formulário{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="card shadow">
+    <div class="card-header custom-header text-white">
+      <h2 class="mb-0">Cadastrar Carga (PDC)</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="row g-3">
+          <!-- 1 -->
+          <div class="col-md-6">
+            {{ form.data_insercao.label_tag }} {{ form.data_insercao }}
+          </div>
+
+          <!-- Extra: Hora -->
+          <div class="col-md-6">
+            {{ form.hora.label_tag }} {{ form.hora }}
+          </div>
+
+          <!-- 2 -->
+          <div class="col-md-6">
+            {{ form.numero_carga.label_tag }} {{ form.numero_carga }}
+          </div>
+
+          <!-- 3 -->
+          <div class="col-md-6">
+            {{ form.modalidade_carga.label_tag }} {{ form.modalidade_carga }}
+          </div>
+
+          <!-- 4 -->
+          <div class="col-md-6">
+            {{ form.numero_equipamento.label_tag }} {{ form.numero_equipamento }}
+          </div>
+
+          <!-- 5 -->
+          <div class="col-md-6">
+            {{ form.setor_insercao.label_tag }} {{ form.setor_insercao }}
+          </div>
+
+          <!-- 6 -->
+          <div class="col-md-6">
+            {{ form.cliente.label_tag }} {{ form.cliente }}
+          </div>
+
+          <!-- 7 -->
+          <div class="col-md-6">
+            {{ form.origem.label_tag }} {{ form.origem }}
+          </div>
+
+          <!-- 8 -->
+          <div class="col-md-6">
+            {{ form.destino.label_tag }} {{ form.destino }}
+          </div>
+
+          <!-- 9 -->
+          <div class="col-md-6">
+            {{ form.transportadora.label_tag }} {{ form.transportadora }}
+          </div>
+
+          <!-- 10 -->
+          <div class="col-md-6">
+            {{ form.placa.label_tag }} {{ form.placa }}
+          </div>
+
+          <!-- 11 -->
+          <div class="col-md-6">
+            {{ form.agente.label_tag }} {{ form.agente }}
+          </div>
+
+          
+
+          <!-- 13 -->
+          <div class="col-md-6">
+            {{ form.valor_carga.label_tag }} {{ form.valor_carga }}
+          </div>
+
+          
+          <!-- 16 -->
+          <div class="col-md-6">
+            {{ form.grupo_operativo.label_tag }} {{ form.grupo_operativo }}
+          </div>
+
+          <!-- Carga no chão e Krona lado a lado -->
+        <div class="row g-3">
+          <div class="col-md-6">
+            {{ form.carga_no_chao.label_tag }} 
+            {{ form.carga_no_chao }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.krona_ok.label_tag }} 
+            {{ form.krona_ok }}
+          </div>
+        </div>
+
+        <!-- Golden logo abaixo -->
+        <div class="row g-3">
+          <div class="col-md-6">
+            {{ form.golden_ok.label_tag }} 
+            {{ form.golden_ok }}
+          </div>
+        </div>
+
+
+          <!-- Observação -->
+          <div class="col-12">
+            {{ form.observacao.label_tag }} {{ form.observacao }}
+          </div>
+        </div>
+
+        <div class="mt-4 text-end">
+          <button type="submit" class="btn btn-success px-4">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

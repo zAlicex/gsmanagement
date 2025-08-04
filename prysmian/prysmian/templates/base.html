@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}PRYSMIAN{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  .navbar-custom {
+    background: linear-gradient(to right, #00C36A, #0098F0, #007BFF);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease;
+    color: #fff !important;
+  }
+
+  .navbar-brand i {
+    color: #fff !important;
+  }
+
+  .navbar-brand:hover {
+    transform: scale(1.05);
+    color: #ffc107 !important;
+  }
+
+  .nav-link {
+    color: #f8fafc !important;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: #facc15;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    color: #facc15 !important;
+  }
+
+  .nav-item i {
+    width: 18px;
+    text-align: center;
+  }
+
+  .modal-header {
+    background-color: #1e293b;
+    color: #f8fafc;
+  }
+
+  .custom-header {
+    background-color: #007BFF;
+    color: #fff;
+  }
+
+  iframe {
+    border: none;
+  }
+</style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <i class="fa-solid fa-truck-moving me-2"></i>PRYSMIAN
+    </a>
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row gap-3">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tabela' %}"><i class="fa fa-table"></i> PDC</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listar_sed' %}"><i class="fa fa-table"></i> SED</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#dashboardModal">
+            <i class="fa fa-chart-line me-1"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i> Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid mt-4 px-0">
+  {% block content %}
+  {% endblock %}
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Modal do Dashboard -->
+<div class="modal fade" id="dashboardModal" tabindex="-1" aria-labelledby="dashboardModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dashboardModalLabel">
+          <i class="fa fa-chart-line me-2"></i>Dashboard Operacional
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://app.powerbi.com/view?r=eyJrIjoiOGE5OGFiNzItZmYzYy00YWMxLThjZDItYzM5ZmRkZTQ5ODI4IiwidCI6IjA1ZTExMDdiLTYwZGUtNDdhOS1iNTU3LWIwMDYwN2I2YjI1OCJ9" 
+            allowfullscreen 
+            frameborder="0">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

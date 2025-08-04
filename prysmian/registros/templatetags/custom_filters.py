@@ -1,0 +1,14 @@
+from django import template
+
+register = template.Library()
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
+@register.filter
+def format_currency(value):
+    try:
+        return f"R$ {float(value):,.2f}".replace(",", "v").replace(".", ",").replace("v", ".")
+    except (ValueError, TypeError):
+        return "R$ 0,00"

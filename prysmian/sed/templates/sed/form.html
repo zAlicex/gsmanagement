@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar Carga (SED){% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Cadastrar Carga (SED)</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            {{ form.data.label_tag }} {{ form.data }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.numero_equipamento.label_tag }} {{ form.numero_equipamento }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.setor_insercao.label_tag }} {{ form.setor_insercao }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.modalidade.label_tag }} {{ form.modalidade }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.cliente.label_tag }} {{ form.cliente }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.origem.label_tag }} {{ form.origem }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.destino.label_tag }} {{ form.destino }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.transportadora.label_tag }} {{ form.transportadora }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.placa.label_tag }} {{ form.placa }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.agente.label_tag }} {{ form.agente }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.valor_carga.label_tag }} {{ form.valor_carga }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.carga_no_chao.label_tag }} {{ form.carga_no_chao }}
+          </div>
+        </div>
+
+        <div class="mt-4 text-end">
+          <a href="{% url 'listar_sed' %}" class="btn btn-secondary">Voltar</a>
+          <button type="submit" class="btn btn-success px-4">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

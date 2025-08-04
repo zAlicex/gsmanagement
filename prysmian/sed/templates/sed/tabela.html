@@ -1,0 +1,731 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}Tabela de Registros SED{% endblock %}
+
+{% block content %}
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f8fafc;
+    color: #334155;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Container principal otimizado para máximo espaço */
+  .container-fluid {
+    width: 100vw;
+    max-width: none;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin: 0 auto;
+    position: relative;
+    left: 0;
+  }
+
+  .mt-5 {
+    margin-top: 0.5rem !important;
+  }
+
+  /* Header com ajuste para o botão */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0;
+    width: calc(100% - 1rem); /* Garante espaço para o botão */
+    max-width: calc(100vw - 1rem); /* Limita ao viewport */
+  }
+
+  .page-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1; /* Ocupa espaço disponível */
+    min-width: 0; /* Permite shrinking se necessário */
+  }
+
+  .page-title h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    white-space: nowrap; /* Evita quebra do título */
+  }
+
+  /* Botão Nova Carga ajustado */
+  .btn-nova-carga {
+    flex-shrink: 0; /* Não encolhe */
+    margin-left: 1rem; /* Espaço entre título e botão */
+    margin-right: 0.5rem; /* Margem da borda direita */
+  }
+
+  /* Filters Section compacta */
+  .filters-section {
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.75rem;
+    width: calc(100% - 1rem);
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .filters-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+  }
+
+  .filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  }
+
+  .filter-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+
+  .seta-link {
+  text-decoration: none;
+  color: #3b82f6; /* azul vivo */
+  font-weight: normal;
+  margin-left: 2px;
+}
+
+.seta-link:hover {
+  text-decoration: underline;
+}
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    white-space: nowrap; /* Evita quebra do texto do botão */
+  }
+
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #2563eb;
+    color: white;
+  }
+
+  .btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+  }
+
+  .btn-secondary:hover {
+    background: #e2e8f0;
+  }
+
+  .btn-success {
+    background: #10b981;
+    color: white;
+  }
+
+  .btn-success:hover {
+    background: #059669;
+    color: white;
+  }
+
+  .btn-outline-primary {
+    background: transparent;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+  }
+
+  .btn-outline-primary:hover {
+    background: #3b82f6;
+    color: white;
+  }
+
+  /* Table Container - sem scroll horizontal */
+  .table-container {
+  width: calc(100% - 1rem);
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    background: white;
+    flex-shrink: 0;
+  }
+
+  .table-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  /* Wrapper SEM scroll horizontal */
+  .table-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+  /* Table otimizada para caber TODAS colunas sem scroll */
+  .tabela-pdc {
+    width: 100%;
+    table-layout: fixed; /* Layout fixo para controle total */
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.7rem; /* Fonte bem pequena */
+  }
+
+  .tabela-pdc th,
+  .tabela-pdc td {
+    padding: 0.4rem 0.2rem; /* Padding mínimo */
+    border-bottom: 1px solid #f1f5f9;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Larguras MUITO pequenas para caber todas as 18 colunas */
+  .tabela-pdc th:nth-child(1), /* Data */
+  .tabela-pdc td:nth-child(1) { width: 4.5%; }
+  
+  .tabela-pdc th:nth-child(2), /* Carga Nº */
+  .tabela-pdc td:nth-child(2) { width: 4.5%; }
+  
+  .tabela-pdc th:nth-child(3), /* Modalidade */
+  .tabela-pdc td:nth-child(3) { width: 5.5%; }
+  
+  .tabela-pdc th:nth-child(4), /* Equipamento */
+  .tabela-pdc td:nth-child(4) { width: 6.5%; }
+  
+  .tabela-pdc th:nth-child(5), /* Setor */
+  .tabela-pdc td:nth-child(5) { width: 4%; }
+  
+  .tabela-pdc th:nth-child(6), /* Cliente */
+  .tabela-pdc td:nth-child(6) { width: 7%; }
+  
+  .tabela-pdc th:nth-child(7), /* Origem */
+  .tabela-pdc td:nth-child(7) { width: 5.5%; }
+  
+  .tabela-pdc th:nth-child(8), /* Destino */
+  .tabela-pdc td:nth-child(8) { width: 5.5%; }
+  
+  .tabela-pdc th:nth-child(9), /* Transportadora */
+  .tabela-pdc td:nth-child(9) { width: 7%; }
+  
+  .tabela-pdc th:nth-child(10), /* Placa */
+  .tabela-pdc td:nth-child(10) { width: 5%; }
+  
+  .tabela-pdc th:nth-child(11), /* Agente */
+  .tabela-pdc td:nth-child(11) { width: 5.5%; }
+  
+  .tabela-pdc th:nth-child(12), /* Carga no Chão */
+  .tabela-pdc td:nth-child(12) { width: 4%; }
+  
+  .tabela-pdc th:nth-child(13), /* Valor */
+  .tabela-pdc td:nth-child(13) { width: 6%; }
+  
+  .tabela-pdc th:nth-child(14), /* Krona */
+  .tabela-pdc td:nth-child(14) { width: 3.5%; }
+  
+  .tabela-pdc th:nth-child(15), /* Golden */
+  .tabela-pdc td:nth-child(15) { width: 3.5%; }
+  
+  .tabela-pdc th:nth-child(16), /* Grupo Op. */
+  .tabela-pdc td:nth-child(16) { width: 5%; }
+  
+  .tabela-pdc th:nth-child(17), /* Obs. */
+  .tabela-pdc td:nth-child(17) { width: 8%; }
+  
+  .tabela-pdc th:nth-child(18), /* Ações */
+  .tabela-pdc td:nth-child(18) { width: 4%; }
+
+  .tabela-pdc th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e2e8f0;
+    font-size: 0.65rem; /* Headers ainda menores */
+    padding: 0.3rem 0.1rem;
+  }
+
+  .tabela-pdc tbody tr:hover {
+    background: #f8fafc;
+  }
+
+  /* Action Buttons compactos */
+  .action-buttons {
+    display: flex;
+    gap: 0.1rem;
+    justify-content: center;
+  }
+
+  .action-btn {
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-warning {
+    background: #fbbf24;
+    color: white;
+  }
+
+  .btn-warning:hover {
+    background: #f59e0b;
+    color: white;
+  }
+
+  /* Status Icons menores */
+  .fa-circle-check {
+    color: #10b981 !important;
+    font-size: 0.8rem;
+  }
+
+  .fa-xmark {
+    color: #ef4444 !important;
+    font-size: 0.8rem;
+  }
+
+  /* Override Bootstrap padding */
+  .px-4, .px-lg-5 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  /* Garantir que tudo fique alinhado à esquerda */
+  .container-fluid > * {
+    margin-left: 0 !important;
+  }
+
+  /* Responsive - ajustar fonte conforme tela */
+  @media (min-width: 1200px) {
+    .tabela-pdc {
+      font-size: 0.75rem;
+    }
+    
+    .tabela-pdc th {
+      font-size: 0.7rem;
+    }
+    
+    .tabela-pdc th,
+    .tabela-pdc td {
+      padding: 0.5rem 0.3rem;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .tabela-pdc {
+      font-size: 0.8rem;
+    }
+    
+    .tabela-pdc th {
+      font-size: 0.75rem;
+    }
+    
+    .tabela-pdc th,
+    .tabela-pdc td {
+      padding: 0.6rem 0.4rem;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .tabela-pdc {
+      font-size: 0.85rem;
+    }
+    
+    .tabela-pdc th {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .tabela-pdc {
+      font-size: 0.65rem;
+    }
+    
+    .tabela-pdc th {
+      font-size: 0.6rem;
+    }
+    
+    .tabela-pdc th,
+    .tabela-pdc td {
+      padding: 0.3rem 0.1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container-fluid {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+
+    .page-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
+      padding: 0;
+      width: calc(100% - 0.5rem);
+    }
+    
+    .btn-nova-carga {
+      margin-left: 0;
+      margin-right: 0;
+      align-self: stretch;
+    }
+
+    .filters-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .filter-actions {
+      justify-content: stretch;
+    }
+
+    .filter-actions .btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .table-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+
+    .table-actions {
+      justify-content: center;
+    }
+    
+    .tabela-pdc {
+      font-size: 0.6rem;
+    }
+    
+    .tabela-pdc th {
+      font-size: 0.55rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-title h2 {
+      font-size: 1.3rem;
+    }
+    
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Modal Enhancements */
+  .modal-content {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .modal-footer {
+    border-top: 1px solid #e2e8f0;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+
+  /* Tooltip otimizado */
+  .tooltip-cell {
+    position: relative;
+    cursor: help;
+  }
+
+  .tooltip-cell:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  /* Garantir que use toda viewport */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  /* Remove qualquer centralização */
+  .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  /* Esconder scroll horizontal globalmente */
+  body {
+    overflow-x: hidden;
+  }
+</style>
+
+<div class="container-fluid px-4 px-lg-5 mt-5">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-title">
+      <i class="fa-solid fa-dolly" style="color: #3b82f6;"></i>
+      <h2>Lista de Registros SED</h2>
+    </div>
+    <a href="{% url 'cadastrar_sed' %}" class="btn btn-outline-primary btn-nova-carga">
+      <i class="fa-solid fa-circle-plus"></i>
+      Cadastrar Novo
+    </a>
+  </div>
+
+  <!-- Filters Section -->
+  <div class="filters-section">
+    <div class="filters-header">
+      <h3><i class="fas fa-filter"></i> Filtros de Pesquisa</h3>
+    </div>
+    <form method="get">
+      <div class="filters-grid">
+        <div class="form-group">
+          <label for="data_inicio">Data Início</label>
+          <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="{{ request.GET.data_inicio }}">
+        </div>
+        <div class="form-group">
+          <label for="data_fim">Data Fim</label>
+          <input type="date" class="form-control" id="data_fim" name="data_fim" value="{{ request.GET.data_fim }}">
+        </div>
+        <div class="form-group">
+          <label for="busca">Buscar em qualquer campo</label>
+          <input type="text" class="form-control" id="busca" name="busca" placeholder="Digite algo..." value="{{ request.GET.busca }}">
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url request.resolver_match.url_name %}'">
+          <i class="fas fa-undo"></i>
+          Limpar
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+          Filtrar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-container">
+    <div class="table-header">
+      <h3>Registros Encontrados ({{ registros|length }})</h3>
+      <div class="table-actions"></div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="tabela-pdc"> <!-- Reutiliza a mesma classe da tabela PDC -->
+        <thead>
+          <tr>
+            <th>
+              Data
+              <a href="?ordenar=data" class="seta-link" title="Ordem crescente">↑</a>
+              <a href="?ordenar=-data" class="seta-link" title="Ordem decrescente">↓</a>
+            </th>                    
+            <th>Equipamento</th>
+            <th>Setor</th>
+            <th>Modalidade</th>
+            <th>Cliente</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Transportadora</th>
+            <th>Placa</th>
+            <th>Agente</th>
+            <th>Carga no Chão</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registro in registros %}
+          <tr>
+            <td>{{ registro.data|date:"d/m/Y" }}</td>
+            <td>{{ registro.numero_equipamento }}</td>
+            <td>{{ registro.setor_insercao }}</td>
+            <td>{{ registro.modalidade }}</td>
+            <td class="tooltip-cell" data-tooltip="{{ registro.cliente }}">{{ registro.cliente }}</td>
+            <td>{{ registro.origem }}</td>
+            <td>{{ registro.destino }}</td>
+            <td class="tooltip-cell" data-tooltip="{{ registro.transportadora }}">{{ registro.transportadora }}</td>
+            <td>{{ registro.placa }}</td>
+            <td class="tooltip-cell" data-tooltip="{{ registro.agente }}">{{ registro.agente }}</td>
+            <td>
+              {% if registro.carga_no_chao %}
+                <i class="fa-solid fa-circle-check text-success"></i>
+              {% else %}
+                <i class="fa-solid fa-xmark text-danger"></i>
+              {% endif %}
+            </td>
+            <td><strong>{{ registro.valor_carga|format_currency }}</strong></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-sm btn-warning action-btn" data-bs-toggle="modal" data-bs-target="#editarModal{{ registro.id }}" title="Editar">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Modal -->
+          <div class="modal fade" id="editarModal{{ registro.id }}" tabindex="-1" aria-labelledby="editarModalLabel{{ registro.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <form method="post" action="{% url 'editar_sed' registro.id %}">
+                  {% csrf_token %}
+                  <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="editarModalLabel{{ registro.id }}">Editar Registro SED</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body">
+                    {% include "formulario_edicao.html" with form=formularios|get_item:registro.id %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const buscaInput = document.getElementById('busca');
+  if (buscaInput) {
+    buscaInput.addEventListener('input', function () {
+      console.log('Filtrando por:', this.value);
+    });
+  }
+
+  document.querySelectorAll('.action-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      console.log('Ação executada');
+    });
+  });
+
+  document.querySelectorAll('.tooltip-cell').forEach(cell => {
+    if (cell.scrollWidth > cell.clientWidth) {
+      cell.style.cursor = 'help';
+    }
+  });
+});
+</script>
+
+{% endblock %}
