@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .models import Sed
 from .forms import SedForm
+from rest_framework import viewsets
+from .serializers import SedSerializer
 
 def listar_sed(request):
     # Pegando parâmetro de ordenação (padrão: -data para ordem decrescente)
@@ -62,3 +64,7 @@ def editar_sed(request, sed_id):
         if form.is_valid():
             form.save()
     return redirect('listar_sed')
+
+class SedViewSet(viewsets.ModelViewSet):
+    queryset = Sed.objects.all()
+    serializer_class = SedSerializer
