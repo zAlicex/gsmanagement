@@ -19,3 +19,21 @@ class SedForm(forms.ModelForm):
             'valor_carga': forms.NumberInput(attrs={'class': 'form-control'}),
             'carga_no_chao': forms.Select(attrs={'class': 'form-control'}),
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        for field in self.fields:
+            value = cleaned_data.get(field)
+            
+            # Verifica se o campo é um campo booleano e converte o valor
+            if field == 'carga_no_chao' and isinstance(value, str):
+                if value.upper() == 'TRUE':
+                    cleaned_data[field] = True
+                elif value.upper() == 'FALSE':
+                    cleaned_data[field] = False
+
+            # Para outros campos, converte strings para maiúsculas
+            elif isinstance(value, str):
+                cleaned_data[field] = value.upper()
+
+        return cleaned_data

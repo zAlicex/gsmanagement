@@ -39,3 +39,21 @@ class CargaForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if not isinstance(field.widget, forms.CheckboxInput):
                 field.widget.attrs['class'] = 'form-control'
+
+    def clean(self):
+        cleaned_data = super().clean()
+        for field in self.fields:
+            value = cleaned_data.get(field)
+            
+            # Para os campos de "Sim/Não", converte para True ou False
+            if field in ['krona_ok', 'golden_ok'] and isinstance(value, str):
+                if value == 'Sim':
+                    cleaned_data[field] = True
+                elif value == 'Não':
+                    cleaned_data[field] = False
+
+            # Para outros campos de texto, converte para maiúsculas
+            elif isinstance(value, str):
+                cleaned_data[field] = value.upper()
+
+        return cleaned_data
