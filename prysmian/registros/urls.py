@@ -2,6 +2,7 @@ from . import views
 from rest_framework import routers
 from .views import CargaViewSet
 from django.urls import path, include
+from .views import exportar_excel
 
 router = routers.DefaultRouter()
 router.register(r'cargas', CargaViewSet)
@@ -12,5 +13,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('editar/<int:carga_id>/', views.editar_carga, name='editar_carga'),
     path('api/', include(router.urls)),
-
+    path('exportar-excel/', exportar_excel, name='exportar_excel'),
 ]

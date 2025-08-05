@@ -74,3 +74,52 @@ from .serializers import CargaSerializer
 class CargaViewSet(viewsets.ModelViewSet):
     queryset = Carga.objects.all()
     serializer_class = CargaSerializer
+
+
+import openpyxl
+from django.http import HttpResponse
+from .models import Carga  # Ou outro modelo que você esteja usando
+
+def exportar_excel(request):
+    # Criação do arquivo Excel
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Cargas"
+
+    # Cabeçalhos da tabela
+    headers = [
+        'Data', 'Carga Nº', 'Modalidade', 'Equipamento', 'Setor', 'Cliente', 'Origem', 'Destino',
+        'Transportadora', 'Placa', 'Agente', 'Carga no Chão', 'Valor', 'Krona', 'Golden', 'Grupo Op.', 'Obs.', 'Ações'
+    ]
+    ws.append(headers)
+
+    # Obtendo os dados dos registros
+    cargas = Carga.objects.all()  # Ou aplique filtros conforme necessário
+    for carga in cargas:
+        row = [
+            carga.data_insercao.strftime('%d/%m/%Y'),
+            carga.numero_carga,
+            carga.modalidade_carga,
+            carga.numero_equipamento,
+            carga.setor_insercao,
+            carga.cliente,
+            carga.origem,
+            carga.destino,
+            carga.transportadora,
+            carga.placa,
+            carga.agente,
+            "Sim" if carga.carga_no_chao else "Não",
+            carga.valor_carga,
+            "Sim" if carga.krona_ok else "Não",
+            "Sim" if carga.golden_ok else "Não",
+            carga.grupo_operativo,
+            carga.observacao,
+            ""  # Aqui você pode adicionar dados adicionais, se necessário
+        ]
+        ws.append(row)
+
+    # Configurar a resposta HTTP para o download
+    response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = 'attachment; filename=cargas.xlsx'
+    wb.save(response)
+    return response

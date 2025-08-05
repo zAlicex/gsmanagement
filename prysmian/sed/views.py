@@ -68,3 +68,46 @@ def editar_sed(request, sed_id):
 class SedViewSet(viewsets.ModelViewSet):
     queryset = Sed.objects.all()
     serializer_class = SedSerializer
+
+import openpyxl
+from django.http import HttpResponse
+from .models import Sed  # Supondo que o modelo do app SED seja 'Sed'
+
+def exportar_excel_sed(request):
+    # Criação do arquivo Excel
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Registros SED"
+
+    # Cabeçalhos da tabela
+    headers = [
+        'Data', 'Equipamento', 'Setor', 'Modalidade', 'Cliente', 'Origem', 'Destino', 
+        'Transportadora', 'Placa', 'Agente', 'Carga no Chão', 'Valor', 'Ações'
+    ]
+    ws.append(headers)
+
+    # Obtendo os dados dos registros
+    registros = Sed.objects.all()  # Ou aplique filtros conforme necessário
+    for registro in registros:
+        row = [
+            registro.data.strftime('%d/%m/%Y'),
+            registro.numero_equipamento,
+            registro.setor_insercao,
+            registro.modalidade,
+            registro.cliente,
+            registro.origem,
+            registro.destino,
+            registro.transportadora,
+            registro.placa,
+            registro.agente,
+            "Sim" if registro.carga_no_chao else "Não",
+            registro.valor_carga,
+            ""  # Aqui você pode adicionar dados adicionais, se necessário
+        ]
+        ws.append(row)
+
+    # Configurar a resposta HTTP para o download
+    response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = 'attachment; filename=registros_sed.xlsx'
+    wb.save(response)
+    return response

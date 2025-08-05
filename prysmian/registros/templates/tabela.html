@@ -300,25 +300,25 @@
   .tabela-pdc td:nth-child(11) { width: 5.5%; }
   
   .tabela-pdc th:nth-child(12), /* Carga no Chão */
-  .tabela-pdc td:nth-child(12) { width: 4%; }
+  .tabela-pdc td:nth-child(12) { width: 5%; }
   
   .tabela-pdc th:nth-child(13), /* Valor */
   .tabela-pdc td:nth-child(13) { width: 6%; }
   
   .tabela-pdc th:nth-child(14), /* Krona */
-  .tabela-pdc td:nth-child(14) { width: 3.5%; }
+  .tabela-pdc td:nth-child(14) { width: 3%; }
   
   .tabela-pdc th:nth-child(15), /* Golden */
-  .tabela-pdc td:nth-child(15) { width: 3.5%; }
+  .tabela-pdc td:nth-child(15) { width: 3%; }
   
   .tabela-pdc th:nth-child(16), /* Grupo Op. */
-  .tabela-pdc td:nth-child(16) { width: 5%; }
+  .tabela-pdc td:nth-child(16) { width: 4%; }
   
   .tabela-pdc th:nth-child(17), /* Obs. */
   .tabela-pdc td:nth-child(17) { width: 8%; }
   
   .tabela-pdc th:nth-child(18), /* Ações */
-  .tabela-pdc td:nth-child(18) { width: 4%; }
+  .tabela-pdc td:nth-child(18) { width: 3%; }
 
   .tabela-pdc th {
     background: #f8fafc;
@@ -578,6 +578,17 @@
       <i class="fa-solid fa-box-open" style="color: #3b82f6;"></i>
       <h2>Lista de Registros PDC</h2>
     </div>
+
+    <!-- Botão de Exportação para Excel -->
+<div>
+    <div class="table-actions">
+        <a href="{% url 'exportar_excel' %}" class="btn btn-outline-primary">
+            <i class="fa fa-file-excel"></i>
+            Exportar para Excel
+        </a>
+    </div>
+</div>
+
     <a href="{% url 'formulario' %}" class="btn btn-outline-primary btn-nova-carga">
       <i class="fa fa-plus-circle"></i>
       Nova Carga
