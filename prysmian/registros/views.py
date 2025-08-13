@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .models import Carga
 from .forms import CargaForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login/')
 def cadastrar_carga(request):
     if request.method == 'POST':
         form = CargaForm(request.POST)
@@ -13,7 +16,7 @@ def cadastrar_carga(request):
         form = CargaForm()
     return render(request, 'form.html', {'form': form})
 
-
+@login_required(login_url='/login/')
 def listar_cargas(request):
     # Pega o parâmetro de ordenação; padrão: decrescente por data_insercao
     ordenar = request.GET.get('ordenar', '-data_insercao')
@@ -54,7 +57,7 @@ def listar_cargas(request):
         'formularios': formularios
     })
 
-
+@login_required(login_url='/login/')
 def editar_carga(request, carga_id):
     carga = get_object_or_404(Carga, id=carga_id)
     if request.method == 'POST':
@@ -79,7 +82,7 @@ class CargaViewSet(viewsets.ModelViewSet):
 import openpyxl
 from django.http import HttpResponse
 from .models import Carga  # Ou outro modelo que você esteja usando
-
+@login_required(login_url='/login/')
 def exportar_excel(request):
     # Criação do arquivo Excel
     wb = openpyxl.Workbook()

@@ -4,7 +4,9 @@ from .models import Sed
 from .forms import SedForm
 from rest_framework import viewsets
 from .serializers import SedSerializer
-
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+@login_required(login_url='/login/')
 def listar_sed(request):
     # Pegando parâmetro de ordenação (padrão: -data para ordem decrescente)
     ordenar = request.GET.get('ordenar', '-data')
@@ -45,7 +47,7 @@ def listar_sed(request):
         'formularios': formularios,
     })
 
-
+@login_required(login_url='/login/')
 def cadastrar_sed(request):
     if request.method == 'POST':
         form = SedForm(request.POST)
@@ -56,7 +58,7 @@ def cadastrar_sed(request):
         form = SedForm()
     return render(request, 'sed/form.html', {'form': form})
 
-
+@login_required(login_url='/login/')
 def editar_sed(request, sed_id):
     registro = get_object_or_404(Sed, pk=sed_id)
     if request.method == 'POST':
@@ -72,7 +74,7 @@ class SedViewSet(viewsets.ModelViewSet):
 import openpyxl
 from django.http import HttpResponse
 from .models import Sed  # Supondo que o modelo do app SED seja 'Sed'
-
+@login_required(login_url='/login/')
 def exportar_excel_sed(request):
     # Criação do arquivo Excel
     wb = openpyxl.Workbook()
