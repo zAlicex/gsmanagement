@@ -4,10 +4,11 @@ from .models import Mexico
 from .forms import MexicoForm
 from rest_framework import viewsets
 from .serializers import MexicoSerializer
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 
 @login_required(login_url='/login/')
+@permission_required('mexico.view_mexico', raise_exception=True)
 def listar_mexico(request):
     # Pegando parâmetro de ordenação (padrão: -fecha_insercion para ordem decrescente)
     ordenar = request.GET.get('ordenar', '-fecha_insercion')
@@ -49,6 +50,7 @@ def listar_mexico(request):
     })
 
 @login_required(login_url='/login/')
+@permission_required('mexico.add_mexico', raise_exception=True)
 def cadastrar_mexico(request):
     if request.method == 'POST':
         form = MexicoForm(request.POST)
@@ -60,6 +62,7 @@ def cadastrar_mexico(request):
     return render(request, 'mexico/form.html', {'form': form})
 
 @login_required(login_url='/login/')
+@permission_required('mexico.change_mexico', raise_exception=True)
 def editar_mexico(request, mexico_id):
     registro = get_object_or_404(Mexico, pk=mexico_id)
     if request.method == 'POST':
@@ -69,6 +72,7 @@ def editar_mexico(request, mexico_id):
     return redirect('listar_mexico')
 
 @login_required(login_url='/login/')
+@permission_required('mexico.delete_mexico', raise_exception=True)
 def deletar_mexico(request, mexico_id):
     if request.method == 'POST':
         registro = get_object_or_404(Mexico, id=mexico_id)
@@ -85,6 +89,7 @@ from django.http import HttpResponse
 from .models import Mexico
 
 @login_required(login_url='/login/')
+@permission_required('mexico.view_mexico', raise_exception=True)
 def exportar_excel_mexico(request):
     # Criação do arquivo Excel
     wb = openpyxl.Workbook()

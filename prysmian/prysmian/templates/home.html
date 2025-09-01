@@ -19,7 +19,11 @@
                         <p class="lead mt-1">Gerencie operações, registros e dashboards de forma eficiente.</p>
                     </div>
                     <hr>
+                    
+                    
                     <div class="row g-3 justify-content-center">
+                        <!-- PDC Card - Com permissão -->
+                        {% if perms.registros.view_carga %}
                         <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
                             <div class="card h-100 border-primary" style="border-radius: 14px;">
                                 <div class="card-body text-center">
@@ -30,6 +34,10 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        
+                        <!-- SED Card -->
+                        {% if perms.sed.view_sed %}
                         <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
                             <div class="card h-100 border-success" style="border-radius: 14px;">
                                 <div class="card-body text-center">
@@ -40,6 +48,10 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        
+                        <!-- Mexico Card -->
+                        {% if perms.mexico.view_mexico %}
                         <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
                             <div class="card h-100 border-info" style="border-radius: 14px;">
                                 <div class="card-body text-center">
@@ -50,6 +62,10 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        
+                        <!-- Costa Rica Card -->
+                        {% if perms.costa_rica.view_costarica %}
                         <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
                             <div class="card h-100 border-warning" style="border-radius: 14px;">
                                 <div class="card-body text-center">
@@ -60,16 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card h-100 border-secondary" style="border-radius: 14px;">
-                                <div class="card-body text-center">
-                                    <i class="fa fa-chart-line fa-3x text-secondary mb-2"></i>
-                                    <h5 class="card-title">Dashboard</h5>
-                                    <p class="card-text">Visualize indicadores operacionais em tempo real.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#dashboardModal">Ver Dashboard</a>
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

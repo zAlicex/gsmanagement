@@ -3,9 +3,10 @@ from django.db.models import Q
 from .models import Carga
 from .forms import CargaForm
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 @login_required(login_url='/login/')
+@permission_required('registros.add_carga', raise_exception=True)
 def cadastrar_carga(request):
     if request.method == 'POST':
         form = CargaForm(request.POST)
@@ -17,6 +18,7 @@ def cadastrar_carga(request):
     return render(request, 'form.html', {'form': form})
 
 @login_required(login_url='/login/')
+@permission_required('registros.view_carga', raise_exception=True)
 def listar_cargas(request):
     # Pega o parâmetro de ordenação; padrão: decrescente por data_insercao
     ordenar = request.GET.get('ordenar', '-data_insercao')
@@ -58,6 +60,7 @@ def listar_cargas(request):
     })
 
 @login_required(login_url='/login/')
+@permission_required('registros.change_carga', raise_exception=True)
 def editar_carga(request, carga_id):
     carga = get_object_or_404(Carga, id=carga_id)
     if request.method == 'POST':
@@ -67,6 +70,7 @@ def editar_carga(request, carga_id):
     return redirect('tabela')
 
 @login_required(login_url='/login/')
+@permission_required('registros.delete_carga', raise_exception=True)
 def deletar_carga(request, carga_id):
     if request.method == 'POST':
         carga = get_object_or_404(Carga, id=carga_id)
@@ -91,6 +95,7 @@ import openpyxl
 from django.http import HttpResponse
 from .models import Carga  # Ou outro modelo que você esteja usando
 @login_required(login_url='/login/')
+@permission_required('registros.view_carga', raise_exception=True)
 def exportar_excel(request):
     # Criação do arquivo Excel
     wb = openpyxl.Workbook()
