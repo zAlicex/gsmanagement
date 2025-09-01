@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      'widget_tweaks',
-    'registros',
-     'sed',
-     'rest_framework',
+        'registros',
+    'sed',
+    'mexico',
+    'costa_rica',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

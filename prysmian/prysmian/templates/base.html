@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,6 +21,14 @@
     color: #fff !important;
   }
 
+  .navbar-brand img {
+    height: 39px;
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
   .navbar-brand i {
     color: #fff !important;
   }
@@ -27,6 +36,10 @@
   .navbar-brand:hover {
     transform: scale(1.05);
     color: #ffc107 !important;
+  }
+
+  .navbar-brand:hover img {
+    filter: brightness(1.1);
   }
 
   .nav-link {
@@ -81,7 +94,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <i class="fa-solid fa-truck-moving me-2"></i>GSMANAGEMENT
+      <img src="{% static 'images/prysmian-logo.png' %}" alt="Prysmian Logo">GSMANAGEMENT
     </a>
     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -97,6 +110,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'listar_sed' %}"><i class="fa fa-table"></i> SED</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listar_mexico' %}"><img src="{% static 'images/mexico.png' %}" alt="Mexico" style="width: 18px; height: 18px; margin-right: 5px;"> Mexico</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listar_costa_rica' %}"><img src="{% static 'images/costa-rica.png' %}" alt="Costa Rica" style="width: 18px; height: 18px; margin-right: 5px;"> Costa Rica</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#dashboardModal">

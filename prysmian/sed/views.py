@@ -67,6 +67,14 @@ def editar_sed(request, sed_id):
             form.save()
     return redirect('listar_sed')
 
+@login_required(login_url='/login/')
+def deletar_sed(request, sed_id):
+    if request.method == 'POST':
+        registro = get_object_or_404(Sed, id=sed_id)
+        registro.delete()
+        messages.success(request, f'Registro SED #{registro.numero_equipamento} foi excluído com sucesso!')
+    return redirect('listar_sed')
+
 class SedViewSet(viewsets.ModelViewSet):
     queryset = Sed.objects.all()
     serializer_class = SedSerializer

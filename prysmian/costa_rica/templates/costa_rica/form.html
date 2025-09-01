@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar Costa Rica{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-plus-circle"></i> Cadastrar Nova Carga Costa Rica
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.fecha_insercion.id_for_label }}" class="form-label">
+                                    Fecha de la inserción *
+                                </label>
+                                {{ form.fecha_insercion }}
+                                {% if form.fecha_insercion.errors %}
+                                    <div class="text-danger">{{ form.fecha_insercion.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.hora.id_for_label }}" class="form-label">
+                                    Hora *
+                                </label>
+                                {{ form.hora }}
+                                {% if form.hora.errors %}
+                                    <div class="text-danger">{{ form.hora.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.sector.id_for_label }}" class="form-label">
+                                    Sector *
+                                </label>
+                                {{ form.sector }}
+                                {% if form.sector.errors %}
+                                    <div class="text-danger">{{ form.sector.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.transportadora.id_for_label }}" class="form-label">
+                                    Transportadora *
+                                </label>
+                                {{ form.transportadora }}
+                                {% if form.transportadora.errors %}
+                                    <div class="text-danger">{{ form.transportadora.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.placa_tracto.id_for_label }}" class="form-label">
+                                    Placa tracto *
+                                </label>
+                                {{ form.placa_tracto }}
+                                {% if form.placa_tracto.errors %}
+                                    <div class="text-danger">{{ form.placa_tracto.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.placa_remolque.id_for_label }}" class="form-label">
+                                    Placa remolque *
+                                </label>
+                                {{ form.placa_remolque }}
+                                {% if form.placa_remolque.errors %}
+                                    <div class="text-danger">{{ form.placa_remolque.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.cliente.id_for_label }}" class="form-label">
+                                    Cliente *
+                                </label>
+                                {{ form.cliente }}
+                                {% if form.cliente.errors %}
+                                    <div class="text-danger">{{ form.cliente.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.origen.id_for_label }}" class="form-label">
+                                    Origen *
+                                </label>
+                                {{ form.origen }}
+                                {% if form.origen.errors %}
+                                    <div class="text-danger">{{ form.origen.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.destino.id_for_label }}" class="form-label">
+                                    Destino *
+                                </label>
+                                {{ form.destino }}
+                                {% if form.destino.errors %}
+                                    <div class="text-danger">{{ form.destino.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.id_localizador.id_for_label }}" class="form-label">
+                                    ID localizador *
+                                </label>
+                                {{ form.id_localizador }}
+                                {% if form.id_localizador.errors %}
+                                    <div class="text-danger">{{ form.id_localizador.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="{{ form.valor_carga.id_for_label }}" class="form-label">
+                                    Valor carga *
+                                </label>
+                                {{ form.valor_carga }}
+                                {% if form.valor_carga.errors %}
+                                    <div class="text-danger">{{ form.valor_carga.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="{{ form.carga_en_piso.id_for_label }}" class="form-label">
+                                    Carga en el piso *
+                                </label>
+                                {{ form.carga_en_piso }}
+                                {% if form.carga_en_piso.errors %}
+                                    <div class="text-danger">{{ form.carga_en_piso.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="{{ form.oficial.id_for_label }}" class="form-label">
+                                    Oficial *
+                                </label>
+                                {{ form.oficial }}
+                                {% if form.oficial.errors %}
+                                    <div class="text-danger">{{ form.oficial.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'listar_costa_rica' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

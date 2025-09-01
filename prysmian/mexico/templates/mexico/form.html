@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar Carga (Mexico){% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Cadastrar Carga (Mexico)</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            {{ form.fecha_insercion.label_tag }} {{ form.fecha_insercion }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.hora.label_tag }} {{ form.hora }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.sector.label_tag }} {{ form.sector }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.transportadora.label_tag }} {{ form.transportadora }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.placa_tracto.label_tag }} {{ form.placa_tracto }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.placa_remolque.label_tag }} {{ form.placa_remolque }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.cliente.label_tag }} {{ form.cliente }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.origen.label_tag }} {{ form.origen }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.destino.label_tag }} {{ form.destino }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.id_localizador.label_tag }} {{ form.id_localizador }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.valor_carga.label_tag }} {{ form.valor_carga }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.carga_en_piso.label_tag }} {{ form.carga_en_piso }}
+          </div>
+
+          <div class="col-md-6">
+            {{ form.oficial.label_tag }} {{ form.oficial }}
+          </div>
+        </div>
+
+        <div class="mt-4 text-end">
+          <a href="{% url 'listar_mexico' %}" class="btn btn-secondary">Voltar</a>
+          <button type="submit" class="btn btn-success px-4">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

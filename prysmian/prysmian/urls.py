@@ -12,6 +12,8 @@ urlpatterns = [
     path('registros/', include('registros.urls')),
     path('', views.home, name='home'),
     path('sed/', include('sed.urls')),
+    path('mexico/', include('mexico.urls')),
+    path('costa_rica/', include('costa_rica.urls')),
     path('login/', auth_views.LoginView.as_view(
         template_name='login.html', 
         next_page='home',

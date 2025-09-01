@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load custom_filters %}
 
-{% block title %}Tabela de Registros SED{% endblock %}
+{% block title %}Tabela de Registros Mexico{% endblock %}
 
 {% block content %}
 
@@ -41,16 +41,16 @@
     align-items: center;
     margin-bottom: 0.75rem;
     padding: 0;
-    width: calc(100% - 1rem); /* Garante espaço para o botão */
-    max-width: calc(100vw - 1rem); /* Limita ao viewport */
+    width: calc(100% - 1rem);
+    max-width: calc(100vw - 1rem);
   }
 
   .page-title {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    flex: 1; /* Ocupa espaço disponível */
-    min-width: 0; /* Permite shrinking se necessário */
+    flex: 1;
+    min-width: 0;
   }
 
   .page-title h2 {
@@ -58,14 +58,35 @@
     font-weight: 700;
     color: #1e293b;
     margin: 0;
-    white-space: nowrap; /* Evita quebra do título */
+    white-space: nowrap;
   }
 
   /* Botão Nova Carga ajustado */
   .btn-nova-carga {
-    flex-shrink: 0; /* Não encolhe */
-    margin-left: 1rem; /* Espaço entre título e botão */
-    margin-right: 0.5rem; /* Margem da borda direita */
+    flex-shrink: 0;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    background-color: white !important;
+    border: 1px solid #007bff !important;
+    color: #007bff !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .btn-nova-carga:hover {
+    background-color: #007bff !important;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+  }
+
+  .btn-nova-carga i {
+    color: #007bff;
+    margin-right: 0.5rem;
+  }
+
+  .btn-nova-carga:hover i {
+    color: white;
   }
 
   /* Filters Section compacta */
@@ -102,100 +123,101 @@
   }
 
   .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+    margin-bottom: 0;
   }
 
   .form-group label {
-    font-size: 0.8rem;
+    display: block;
+    font-size: 0.875rem;
     font-weight: 500;
-    color: #374151;
+    color: #475569;
+    margin-bottom: 0.25rem;
   }
 
-  .form-group input,
-  .form-group select {
-    padding: 0.6rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    transition: all 0.3s;
+  .form-control {
     width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
-  .form-group input:focus,
-  .form-group select:focus {
-    outline: none;
+  .form-control:focus {
     border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   .filter-actions {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.5rem;
     justify-content: flex-end;
   }
 
-  .seta-link {
-  text-decoration: none;
-  color: #3b82f6; /* azul vivo */
-  font-weight: normal;
-  margin-left: 2px;
-}
-
-.seta-link:hover {
-  text-decoration: underline;
-}
-
   .btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
-    border: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     text-decoration: none;
-    white-space: nowrap; /* Evita quebra do texto do botão */
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    white-space: nowrap;
   }
 
   .btn-primary {
     background: #3b82f6;
+    border-color: #3b82f6;
     color: white;
   }
 
   .btn-primary:hover {
     background: #2563eb;
-    color: white;
+    border-color: #2563eb;
   }
 
   .btn-secondary {
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    background: #6b7280;
+    border-color: #6b7280;
+    color: white;
   }
 
   .btn-secondary:hover {
-    background: #e2e8f0;
+    background: #4b5563;
+    border-color: #4b5563;
   }
 
   .btn-success {
     background: #10b981;
+    border-color: #10b981;
     color: white;
   }
 
   .btn-success:hover {
     background: #059669;
+    border-color: #059669;
+  }
+
+  .btn-warning {
+    background: #f59e0b;
+    border-color: #f59e0b;
     color: white;
+  }
+
+  .btn-warning:hover {
+    background: #d97706;
+    border-color: #d97706;
   }
 
   .btn-outline-primary {
     background: transparent;
+    border-color: #3b82f6;
     color: #3b82f6;
-    border: 1px solid #3b82f6;
   }
 
   .btn-outline-primary:hover {
@@ -203,18 +225,17 @@
     color: white;
   }
 
-  /* Table Container - sem scroll horizontal */
+  /* Table Container */
   .table-container {
-  width: calc(100% - 1rem);
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
+    width: calc(100% - 1rem);
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 
   .table-header {
     display: flex;
@@ -238,25 +259,25 @@
     gap: 0.5rem;
   }
 
-  /* Wrapper SEM scroll horizontal */
+  /* Wrapper */
   .table-wrapper {
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-  /* Table otimizada para caber TODAS colunas sem scroll */
-  .tabela-pdc {
     width: 100%;
-    table-layout: fixed; /* Layout fixo para controle total */
-    border-collapse: collapse;
-    margin: 0;
-    font-size: 0.7rem; /* Fonte bem pequena */
+    overflow-x: auto;
+    overflow-y: auto;
   }
 
-  .tabela-pdc th,
-  .tabela-pdc td {
-    padding: 0.4rem 0.2rem; /* Padding mínimo */
+  /* Table otimizada para as 13 colunas do Mexico */
+  .tabela-mexico {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.7rem;
+  }
+
+  .tabela-mexico th,
+  .tabela-mexico td {
+    padding: 0.4rem 0.2rem;
     border-bottom: 1px solid #f1f5f9;
     text-align: center;
     vertical-align: middle;
@@ -266,183 +287,113 @@
     font-weight: normal !important; /* Garante que não fique em negrito */
   }
 
-  /* Larguras MUITO pequenas para caber todas as 18 colunas */
-  .tabela-pdc th:nth-child(1), /* Data */
-  .tabela-pdc td:nth-child(1) { width: 4.5%; }
+  /* Larguras para as 13 colunas do Mexico */
+  .tabela-mexico th:nth-child(1), /* Fecha de la inserción */
+  .tabela-mexico td:nth-child(1) { width: 7%; }
   
-  .tabela-pdc th:nth-child(2), /* Carga Nº */
-  .tabela-pdc td:nth-child(2) { width: 4.5%; }
+  .tabela-mexico th:nth-child(2), /* Hora */
+  .tabela-mexico td:nth-child(2) { width: 5%; }
   
-  .tabela-pdc th:nth-child(3), /* Modalidade */
-  .tabela-pdc td:nth-child(3) { width: 5.5%; }
+  .tabela-mexico th:nth-child(3), /* Sector */
+  .tabela-mexico td:nth-child(3) { width: 6%; }
   
-  .tabela-pdc th:nth-child(4), /* Equipamento */
-  .tabela-pdc td:nth-child(4) { width: 6.5%; }
+  .tabela-mexico th:nth-child(4), /* Transportadora */
+  .tabela-mexico td:nth-child(4) { width: 8%; }
   
-  .tabela-pdc th:nth-child(5), /* Setor */
-  .tabela-pdc td:nth-child(5) { width: 4%; }
+  .tabela-mexico th:nth-child(5), /* Placa tracto */
+  .tabela-mexico td:nth-child(5) { width: 6%; }
   
-  .tabela-pdc th:nth-child(6), /* Cliente */
-  .tabela-pdc td:nth-child(6) { width: 7%; }
+  .tabela-mexico th:nth-child(6), /* Placa remolque */
+  .tabela-mexico td:nth-child(6) { width: 6%; }
   
-  .tabela-pdc th:nth-child(7), /* Origem */
-  .tabela-pdc td:nth-child(7) { width: 5.5%; }
+  .tabela-mexico th:nth-child(7), /* Cliente */
+  .tabela-mexico td:nth-child(7) { width: 8%; }
   
-  .tabela-pdc th:nth-child(8), /* Destino */
-  .tabela-pdc td:nth-child(8) { width: 5.5%; }
+  .tabela-mexico th:nth-child(8), /* Origen */
+  .tabela-mexico td:nth-child(8) { width: 6%; }
   
-  .tabela-pdc th:nth-child(9), /* Transportadora */
-  .tabela-pdc td:nth-child(9) { width: 7%; }
+  .tabela-mexico th:nth-child(9), /* Destino */
+  .tabela-mexico td:nth-child(9) { width: 6%; }
   
-  .tabela-pdc th:nth-child(10), /* Placa */
-  .tabela-pdc td:nth-child(10) { width: 5%; }
+  .tabela-mexico th:nth-child(10), /* ID localizador */
+  .tabela-mexico td:nth-child(10) { width: 8%; }
   
-  .tabela-pdc th:nth-child(11), /* Agente */
-  .tabela-pdc td:nth-child(11) { width: 5.5%; }
+  .tabela-mexico th:nth-child(11), /* Valor carga */
+  .tabela-mexico td:nth-child(11) { width: 7%; }
   
-  .tabela-pdc th:nth-child(12), /* Carga no Chão */
-  .tabela-pdc td:nth-child(12) { width: 4%; }
+  .tabela-mexico th:nth-child(12), /* Carga en el piso */
+  .tabela-mexico td:nth-child(12) { width: 6%; }
   
-  .tabela-pdc th:nth-child(13), /* Valor */
-  .tabela-pdc td:nth-child(13) { width: 6%; }
+  .tabela-mexico th:nth-child(13), /* Oficial */
+  .tabela-mexico td:nth-child(13) { width: 6%; }
   
-  .tabela-pdc th:nth-child(14), /* Krona */
-  .tabela-pdc td:nth-child(14) { width: 3.5%; }
-  
-  .tabela-pdc th:nth-child(15), /* Golden */
-  .tabela-pdc td:nth-child(15) { width: 3.5%; }
-  
-  .tabela-pdc th:nth-child(16), /* Grupo Op. */
-  .tabela-pdc td:nth-child(16) { width: 5%; }
-  
-  .tabela-pdc th:nth-child(17), /* Obs. */
-  .tabela-pdc td:nth-child(17) { width: 8%; }
-  
-  .tabela-pdc th:nth-child(18), /* Ações */
-  .tabela-pdc td:nth-child(18) { width: 4%; }
+  .tabela-mexico th:nth-child(14), /* Ações */
+  .tabela-mexico td:nth-child(14) { width: 5%; }
 
-  .tabela-pdc th {
-    background: #f8fafc;
+  .tabela-mexico th {
+    background: #0ea5e9;
+    color: white;
     font-weight: 600;
-    color: #374151;
-    border-bottom: 2px solid #e2e8f0;
-    font-size: 0.65rem; /* Headers ainda menores */
-    padding: 0.3rem 0.1rem;
+    font-size: 0.75rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
-  .tabela-pdc tbody tr:hover {
+  .tabela-mexico tbody tr:hover {
     background: #f8fafc;
   }
 
-  /* Action Buttons compactos */
-  .action-buttons {
-    display: flex;
-    gap: 0.1rem;
-    justify-content: center;
+  .tabela-mexico tbody tr:nth-child(even) {
+    background: #fafafa;
   }
 
-  .action-btn {
-    padding: 0.2rem;
-    border-radius: 0.2rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 24px;
-    height: 24px;
-    font-size: 0.7rem;
+  .tabela-mexico tbody tr:nth-child(even):hover {
+    background: #f1f5f9;
   }
 
-  .action-btn:hover {
-    transform: translateY(-1px);
-  }
-
-  .btn-warning {
-    background: #fbbf24;
-    color: white;
-  }
-
-  .btn-warning:hover {
-    background: #f59e0b;
-    color: white;
-  }
-
-  /* Status Icons menores */
-  .fa-circle-check {
-    color: #10b981 !important;
-    font-size: 0.8rem;
-  }
-
-  .fa-xmark {
-    color: #ef4444 !important;
-    font-size: 0.8rem;
-  }
-
-  /* Override Bootstrap padding */
-  .px-4, .px-lg-5 {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-  }
-
-  /* Garantir que tudo fique alinhado à esquerda */
-  .container-fluid > * {
-    margin-left: 0 !important;
-  }
-
-  /* Responsive - ajustar fonte conforme tela */
+  /* Responsividade */
   @media (min-width: 1200px) {
-    .tabela-pdc {
+    .tabela-mexico {
       font-size: 0.75rem;
     }
     
-    .tabela-pdc th {
-      font-size: 0.7rem;
+    .tabela-mexico th {
+      font-size: 0.8rem;
     }
     
-    .tabela-pdc th,
-    .tabela-pdc td {
+    .tabela-mexico th,
+    .tabela-mexico td {
       padding: 0.5rem 0.3rem;
     }
   }
 
   @media (min-width: 1400px) {
-    .tabela-pdc {
+    .tabela-mexico {
       font-size: 0.8rem;
     }
     
-    .tabela-pdc th {
-      font-size: 0.75rem;
+    .tabela-mexico th {
+      font-size: 0.85rem;
     }
     
-    .tabela-pdc th,
-    .tabela-pdc td {
+    .tabela-mexico th,
+    .tabela-mexico td {
       padding: 0.6rem 0.4rem;
     }
   }
 
-  @media (min-width: 1600px) {
-    .tabela-pdc {
-      font-size: 0.85rem;
-    }
-    
-    .tabela-pdc th {
-      font-size: 0.8rem;
-    }
-  }
-
   @media (max-width: 1199px) {
-    .tabela-pdc {
+    .tabela-mexico {
       font-size: 0.65rem;
     }
     
-    .tabela-pdc th {
-      font-size: 0.6rem;
+    .tabela-mexico th {
+      font-size: 0.7rem;
     }
     
-    .tabela-pdc th,
-    .tabela-pdc td {
+    .tabela-mexico th,
+    .tabela-mexico td {
       padding: 0.3rem 0.1rem;
     }
   }
@@ -490,47 +441,42 @@
       justify-content: center;
     }
     
-    .tabela-pdc {
+    .tabela-mexico {
       font-size: 0.6rem;
     }
     
-    .tabela-pdc th {
-      font-size: 0.55rem;
+    .tabela-mexico th {
+      font-size: 0.65rem;
     }
   }
 
-  @media (max-width: 480px) {
-    .page-title h2 {
-      font-size: 1.3rem;
-    }
-    
-    .btn {
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
-    }
+  /* Estilos para as setas de ordenação */
+  .seta-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 0.25rem;
+    font-size: 0.75rem;
   }
 
-  /* Modal Enhancements */
-  .modal-content {
-    border-radius: 0.5rem;
-    border: none;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  .seta-link:hover {
+    color: #fbbf24;
   }
 
-  .modal-header {
-    border-bottom: 1px solid #e2e8f0;
-    border-radius: 0.5rem 0.5rem 0 0;
+  /* Estilos para botões de ação */
+  .action-buttons {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
   }
 
-  .modal-footer {
-    border-top: 1px solid #e2e8f0;
-    border-radius: 0 0 0.5rem 0.5rem;
+  .action-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
   }
 
-  /* Tooltip otimizado */
+  /* Estilos para tooltips */
   .tooltip-cell {
     position: relative;
-    cursor: help;
   }
 
   .tooltip-cell:hover::after {
@@ -541,56 +487,52 @@
     transform: translateX(-50%);
     background: #1f2937;
     color: white;
-    padding: 0.4rem;
-    border-radius: 0.3rem;
-    font-size: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
     white-space: nowrap;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 200px;
-    word-wrap: break-word;
-    white-space: normal;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
-  /* Garantir que use toda viewport */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  /* Estilos para ícones */
+  .fa-solid {
+    font-size: 0.875rem;
   }
 
-  /* Remove qualquer centralização */
-  .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
-    margin-left: 0 !important;
-    margin-right: auto !important;
+  .text-success {
+    color: #10b981 !important;
   }
 
-  /* Esconder scroll horizontal globalmente */
-  body {
-    overflow-x: hidden;
+  .text-danger {
+    color: #ef4444 !important;
+  }
+
+  /* Estilos para valores monetários */
+  strong {
+    font-weight: 600;
   }
 </style>
 
-<div class="container-fluid px-4 px-lg-5 mt-5">
+<div class="container-fluid mt-5">
   <!-- Page Header -->
   <div class="page-header">
     <div class="page-title">
-      <i class="fa-solid fa-dolly" style="color: #3b82f6;"></i>
-      <h2>Lista de Registros SED</h2>
+      <h2><i class="fas fa-truck"></i> Registros Mexico</h2>
     </div>
 
-  <div>
-      <div class="table-actions">
-          <a href="{% url 'exportar_excel_sed' %}" class="btn btn-outline-primary">
-              <i class="fa fa-file-excel"></i>
-              Exportar para Excel
-          </a>
-      </div>
-  </div>
+    <!-- Botão de Exportação para Excel -->
+    <div>
+        <div class="table-actions">
+            <a href="{% url 'exportar_excel_mexico' %}" class="btn btn-outline-primary">
+                <i class="fa fa-file-excel"></i>
+                Exportar para Excel
+            </a>
+        </div>
+    </div>
 
-    <a href="{% url 'cadastrar_sed' %}" class="btn btn-outline-primary btn-nova-carga">
-      <i class="fa-solid fa-circle-plus"></i>
+    <a href="{% url 'cadastrar_mexico' %}" class="btn btn-outline-primary btn-nova-carga">
+      <i class="fas fa-plus-circle"></i>
       Cadastrar Novo
     </a>
   </div>
@@ -636,49 +578,45 @@
     </div>
 
     <div class="table-wrapper">
-      <table class="tabela-pdc"> <!-- Reutiliza a mesma classe da tabela PDC -->
+      <table class="tabela-mexico">
         <thead>
           <tr>
             <th>
-              Data
-              <a href="?ordenar=data" class="seta-link" title="Ordem crescente">↑</a>
-              <a href="?ordenar=-data" class="seta-link" title="Ordem decrescente">↓</a>
-            </th>                    
-            <th>Equipamento</th>
-            <th>Setor</th>
-            <th>Modalidade</th>
-            <th>Cliente</th>
-            <th>Origem</th>
-            <th>Destino</th>
+              Fecha de la inserción
+              <a href="?ordenar=fecha_insercion" class="seta-link" title="Ordem crescente">↑</a>
+              <a href="?ordenar=-fecha_insercion" class="seta-link" title="Ordem decrescente">↓</a>
+            </th>
+            <th>Hora</th>
+            <th>Sector</th>
             <th>Transportadora</th>
-            <th>Placa</th>
-            <th>Agente</th>
-            <th>Carga no Chão</th>
-            <th>Valor</th>
-            <th>Ações</th>
+            <th>Placa tracto</th>
+            <th>Placa remolque</th>
+            <th>Cliente</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>ID localizador</th>
+            <th>Valor carga</th>
+            <th>Carga en el piso</th>
+            <th>Oficial</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {% for registro in registros %}
           <tr>
-            <td>{{ registro.data|date:"d/m/Y" }}</td>
-            <td>{{ registro.numero_equipamento }}</td>
-            <td>{{ registro.setor_insercao }}</td>
-            <td>{{ registro.modalidade }}</td>
-            <td class="tooltip-cell" data-tooltip="{{ registro.cliente }}">{{ registro.cliente }}</td>
-            <td>{{ registro.origem }}</td>
-            <td>{{ registro.destino }}</td>
+            <td>{{ registro.fecha_insercion|date:"d/m/Y" }}</td>
+            <td>{{ registro.hora|time:"H:i" }}</td>
+            <td>{{ registro.sector }}</td>
             <td class="tooltip-cell" data-tooltip="{{ registro.transportadora }}">{{ registro.transportadora }}</td>
-            <td>{{ registro.placa }}</td>
-            <td class="tooltip-cell" data-tooltip="{{ registro.agente }}">{{ registro.agente }}</td>
-            <td>
-              {% if registro.carga_no_chao %}
-                <i class="fa-solid fa-circle-check text-success"></i>
-              {% else %}
-                <i class="fa-solid fa-xmark text-danger"></i>
-              {% endif %}
-            </td>
+            <td>{{ registro.placa_tracto }}</td>
+            <td>{{ registro.placa_remolque }}</td>
+            <td class="tooltip-cell" data-tooltip="{{ registro.cliente }}">{{ registro.cliente }}</td>
+            <td>{{ registro.origen }}</td>
+            <td>{{ registro.destino }}</td>
+            <td>{{ registro.id_localizador }}</td>
             <td>{{ registro.valor_carga|format_currency }}</td>
+            <td>{{ registro.carga_en_piso }}</td>
+            <td>{{ registro.oficial }}</td>
             <td>
               <div class="action-buttons">
                 <button class="btn btn-sm btn-warning action-btn" data-bs-toggle="modal" data-bs-target="#editarModal{{ registro.id }}" title="Editar">
@@ -695,14 +633,14 @@
           <div class="modal fade" id="editarModal{{ registro.id }}" tabindex="-1" aria-labelledby="editarModalLabel{{ registro.id }}" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
               <div class="modal-content">
-                <form method="post" action="{% url 'editar_sed' registro.id %}">
+                <form method="post" action="{% url 'editar_mexico' registro.id %}">
                   {% csrf_token %}
                   <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="editarModalLabel{{ registro.id }}">Editar Registro SED</h5>
+                    <h5 class="modal-title" id="editarModalLabel{{ registro.id }}">Editar Registro Mexico</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                   </div>
                   <div class="modal-body">
-                    {% include "formulario_edicao.html" with form=formularios|get_item:registro.id %}
+                    {% include "mexico/formulario_edicao.html" with form=formularios|get_item:registro.id %}
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -717,7 +655,7 @@
           <div class="modal fade" id="deletarModal{{ registro.id }}" tabindex="-1" aria-labelledby="deletarModalLabel{{ registro.id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <form method="post" action="{% url 'deletar_sed' registro.id %}">
+                <form method="post" action="{% url 'deletar_mexico' registro.id %}">
                   {% csrf_token %}
                   <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title" id="deletarModalLabel{{ registro.id }}">
@@ -727,7 +665,7 @@
                   </div>
                   <div class="modal-body text-center">
                     <p class="mb-3">
-                      <strong>Tem certeza que deseja excluir o Registro SED #{{ registro.numero_equipamento }}?</strong>
+                      <strong>Tem certeza que deseja excluir o Registro Mexico #{{ registro.id_localizador }}?</strong>
                     </p>
                     <p class="text-muted">
                       Esta ação não pode ser desfeita e removerá permanentemente todos os dados deste registro.

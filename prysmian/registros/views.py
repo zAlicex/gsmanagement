@@ -66,6 +66,14 @@ def editar_carga(request, carga_id):
             form.save()
     return redirect('tabela')
 
+@login_required(login_url='/login/')
+def deletar_carga(request, carga_id):
+    if request.method == 'POST':
+        carga = get_object_or_404(Carga, id=carga_id)
+        carga.delete()
+        messages.success(request, f'Carga #{carga.numero_carga} foi excluída com sucesso!')
+    return redirect('tabela')
+
 
 def login_view(request):
     return render(request, 'login.html')

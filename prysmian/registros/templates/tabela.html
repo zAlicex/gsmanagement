@@ -263,6 +263,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: normal !important; /* Garante que não fique em negrito */
   }
 
   /* Larguras MUITO pequenas para caber todas as 18 colunas */
@@ -336,8 +337,12 @@
   /* Action Buttons compactos */
   .action-buttons {
     display: flex;
-    gap: 0.1rem;
+    gap: 0.5rem;
     justify-content: center;
+  }
+  
+  .action-buttons .btn {
+    min-width: 32px;
   }
 
   .action-btn {
@@ -686,7 +691,7 @@
                 <i class="fa-solid fa-xmark text-danger"></i>
               {% endif %}
             </td>
-            <td><strong>{{ carga.valor_carga|format_currency }}</strong></td>
+            <td>{{ carga.valor_carga|format_currency }}</td>
             <td>
               {% if carga.krona_ok %}
                 <i class="fa-solid fa-circle-check text-success"></i>
@@ -708,6 +713,9 @@
                 <button class="btn btn-sm btn-warning action-btn" data-bs-toggle="modal" data-bs-target="#editarModal{{ carga.id }}" title="Editar">
                   <i class="fa fa-edit"></i>
                 </button>
+                <button class="btn btn-sm btn-danger action-btn" data-bs-toggle="modal" data-bs-target="#deletarModal{{ carga.id }}" title="Excluir">
+                  <i class="fa fa-trash"></i>
+                </button>
               </div>
             </td>
           </tr>
@@ -728,6 +736,37 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Salvar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal de Confirmação de Exclusão -->
+          <div class="modal fade" id="deletarModal{{ carga.id }}" tabindex="-1" aria-labelledby="deletarModalLabel{{ carga.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <form method="post" action="{% url 'deletar_carga' carga.id %}">
+                  {% csrf_token %}
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deletarModalLabel{{ carga.id }}">
+                      <i class="fa fa-exclamation-triangle me-2"></i>Confirmar Exclusão
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <p class="mb-3">
+                      <strong>Tem certeza que deseja excluir a Carga #{{ carga.numero_carga }}?</strong>
+                    </p>
+                    <p class="text-muted">
+                      Esta ação não pode ser desfeita e removerá permanentemente todos os dados desta carga.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">
+                      <i class="fa fa-trash me-1"></i>Sim, Excluir
+                    </button>
                   </div>
                 </form>
               </div>
