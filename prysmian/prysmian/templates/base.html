@@ -105,18 +105,27 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
         </li>
+        {% if perms.registros.view_carga %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'tabela' %}"><i class="fa fa-table"></i> PDC</a>
         </li>
+        {% endif %}
+        {% if perms.sed.view_sed %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'listar_sed' %}"><i class="fa fa-table"></i> SED</a>
         </li>
+        {% endif %}
+        {% if perms.mexico.view_mexico %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'listar_mexico' %}"><img src="{% static 'images/mexico.png' %}" alt="Mexico" style="width: 18px; height: 18px; margin-right: 5px;"> Mexico</a>
         </li>
-        <li class="nav-item">
+        {% endif %}
+        {% if perms.costa_rica.view_costarica %}
+        <li class="nav-item"> 
           <a class="nav-link" href="{% url 'listar_costa_rica' %}"><img src="{% static 'images/costa-rica.png' %}" alt="Costa Rica" style="width: 18px; height: 18px; margin-right: 5px;"> Costa Rica</a>
         </li>
+        {% endif %}
+        {% if perms.registros.view_carga %}
         <li class="nav-item">
           <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#dashboardModal">
             <i class="fa fa-chart-line me-1"></i> Dashboard
@@ -134,6 +143,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i> Login</a>
         </li>
+        {% endif %}
         {% endif %}
       </ul>
     </div>
