@@ -518,7 +518,7 @@
   <!-- Page Header -->
   <div class="page-header">
     <div class="page-title">
-      <h2><i class="fas fa-truck"></i> Registros Mexico</h2>
+      <h2><i class="fas fa-truck"></i> Registros de México</h2>
     </div>
 
     <!-- Botão de Exportação para Excel -->
@@ -526,41 +526,41 @@
         <div class="table-actions">
             <a href="{% url 'exportar_excel_mexico' %}" class="btn btn-outline-primary">
                 <i class="fa fa-file-excel"></i>
-                Exportar para Excel
+                Exportar a Excel
             </a>
         </div>
     </div>
 
     <a href="{% url 'cadastrar_mexico' %}" class="btn btn-outline-primary btn-nova-carga">
       <i class="fas fa-plus-circle"></i>
-      Cadastrar Novo
+      Crear Nuevo
     </a>
   </div>
 
   <!-- Filters Section -->
   <div class="filters-section">
     <div class="filters-header">
-      <h3><i class="fas fa-filter"></i> Filtros de Pesquisa</h3>
+      <h3><i class="fas fa-filter"></i> Filtros de Búsqueda</h3>
     </div>
     <form method="get">
       <div class="filters-grid">
         <div class="form-group">
-          <label for="data_inicio">Data Início</label>
+          <label for="data_inicio">Fecha de Inicio</label>
           <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="{{ request.GET.data_inicio }}">
         </div>
         <div class="form-group">
-          <label for="data_fim">Data Fim</label>
+          <label for="data_fim">Fecha de Fin</label>
           <input type="date" class="form-control" id="data_fim" name="data_fim" value="{{ request.GET.data_fim }}">
         </div>
         <div class="form-group">
-          <label for="busca">Buscar em qualquer campo</label>
+          <label for="busca">Buscar en cualquier campo</label>
           <input type="text" class="form-control" id="busca" name="busca" placeholder="Digite algo..." value="{{ request.GET.busca }}">
         </div>
       </div>
       <div class="filter-actions">
         <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url request.resolver_match.url_name %}'">
           <i class="fas fa-undo"></i>
-          Limpar
+          Limpiar
         </button>
         <button type="submit" class="btn btn-primary">
           <i class="fas fa-search"></i>
