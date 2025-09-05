@@ -107,12 +107,12 @@
         </li>
         {% if perms.registros.view_carga %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'tabela' %}"><i class="fa fa-table"></i> PDC</a>
+          <a class="nav-link" href="{% url 'tabela' %}"><img src="{% static 'images/brasil.png' %}" alt="Brasil" style="width: 18px; height: 18px; margin-right: 5px;"> PDC</a>
         </li>
         {% endif %}
         {% if perms.sed.view_sed %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'listar_sed' %}"><i class="fa fa-table"></i> SED</a>
+          <a class="nav-link" href="{% url 'listar_sed' %}"><img src="{% static 'images/brasil.png' %}" alt="Brasil" style="width: 18px; height: 18px; margin-right: 5px;"> SED</a>
         </li>
         {% endif %}
         {% if perms.mexico.view_mexico %}

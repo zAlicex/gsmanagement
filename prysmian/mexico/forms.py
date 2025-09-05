@@ -17,7 +17,7 @@ class MexicoForm(forms.ModelForm):
             'destino': forms.TextInput(attrs={'class': 'form-control'}),
             'id_localizador': forms.TextInput(attrs={'class': 'form-control'}),
             'valor_carga': forms.NumberInput(attrs={'class': 'form-control'}),
-            'carga_en_piso': forms.TextInput(attrs={'class': 'form-control'}),
+            'carga_en_piso': forms.Select(choices=[('', 'Seleccione...'), ('Sí', 'Sí'), ('No', 'No')], attrs={'class': 'form-control'}),
             'oficial': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
