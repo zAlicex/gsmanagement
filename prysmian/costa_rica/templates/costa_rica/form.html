@@ -121,7 +121,16 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.contrato.id_for_label }}" class="form-label">
+                                    Contrato *
+                                </label>
+                                {{ form.contrato }}
+                                {% if form.contrato.errors %}
+                                    <div class="text-danger">{{ form.contrato.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
                                 <label for="{{ form.valor_carga.id_for_label }}" class="form-label">
                                     Valor carga *
                                 </label>
@@ -130,6 +139,9 @@
                                     <div class="text-danger">{{ form.valor_carga.errors }}</div>
                                 {% endif %}
                             </div>
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="{{ form.carga_en_piso.id_for_label }}" class="form-label">
                                     Carga en el piso *
@@ -146,6 +158,18 @@
                                 {{ form.oficial }}
                                 {% if form.oficial.errors %}
                                     <div class="text-danger">{{ form.oficial.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="{{ form.observacao.id_for_label }}" class="form-label">
+                                    Observación
+                                </label>
+                                {{ form.observacao }}
+                                {% if form.observacao.errors %}
+                                    <div class="text-danger">{{ form.observacao.errors }}</div>
                                 {% endif %}
                             </div>
                         </div>

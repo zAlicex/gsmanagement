@@ -645,6 +645,7 @@
               <a href="?ordenar=-data" class="seta-link" title="Ordem decrescente">↓</a>
             </th>                    
             <th>Equipamento</th>
+            <th>Contrato</th>
             <th>Setor</th>
             <th>Modalidade</th>
             <th>Cliente</th>
@@ -655,6 +656,7 @@
             <th>Agente</th>
             <th>Carga no Chão</th>
             <th>Valor</th>
+            <th>Observação</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -663,6 +665,7 @@
           <tr>
             <td>{{ registro.data|date:"d/m/Y" }}</td>
             <td>{{ registro.numero_equipamento }}</td>
+            <td>{{ registro.contrato }}</td>
             <td>{{ registro.setor_insercao }}</td>
             <td>{{ registro.modalidade }}</td>
             <td class="tooltip-cell" data-tooltip="{{ registro.cliente }}">{{ registro.cliente }}</td>
@@ -679,6 +682,7 @@
               {% endif %}
             </td>
             <td>{{ registro.valor_carga|format_currency }}</td>
+            <td class="tooltip-cell" data-tooltip="{{ registro.observacao|default:'Nenhuma observação' }}">{{ registro.observacao|default:'-' }}</td>
             <td>
               <div class="action-buttons">
                 <button class="btn btn-sm btn-warning action-btn" data-bs-toggle="modal" data-bs-target="#editarModal{{ registro.id }}" title="Editar">

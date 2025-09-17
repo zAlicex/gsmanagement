@@ -100,7 +100,7 @@ def exportar_excel_mexico(request):
     headers = [
         'Fecha de la inserción', 'Hora', 'Sector', 'Transportadora', 'Placa tracto', 
         'Placa remolque', 'Cliente', 'Origen', 'Destino', 'ID localizador', 
-        'Valor carga', 'Carga en el piso', 'Oficial'
+        'Contrato', 'Valor carga', 'Carga en el piso', 'Oficial', 'Observación'
     ]
     ws.append(headers)
 
@@ -118,9 +118,11 @@ def exportar_excel_mexico(request):
             registro.origen,
             registro.destino,
             registro.id_localizador,
+            registro.contrato,
             registro.valor_carga,
             registro.carga_en_piso,
             registro.oficial,
+            registro.observacao or "",
         ]
         ws.append(row)
 

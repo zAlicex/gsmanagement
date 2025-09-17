@@ -266,7 +266,7 @@
     overflow-y: auto;
   }
 
-  /* Table otimizada para as 13 colunas do Mexico */
+  /* Table otimizada para as 14 colunas do Mexico */
   .tabela-mexico {
     width: 100%;
     table-layout: fixed;
@@ -287,7 +287,7 @@
     font-weight: normal !important; /* Garante que não fique em negrito */
   }
 
-  /* Larguras para as 13 colunas do Mexico */
+  /* Larguras para as 14 colunas do Mexico */
   .tabela-mexico th:nth-child(1), /* Fecha de la inserción */
   .tabela-mexico td:nth-child(1) { width: 7%; }
   
@@ -316,19 +316,22 @@
   .tabela-mexico td:nth-child(9) { width: 6%; }
   
   .tabela-mexico th:nth-child(10), /* ID localizador */
-  .tabela-mexico td:nth-child(10) { width: 8%; }
+  .tabela-mexico td:nth-child(10) { width: 7%; }
   
-  .tabela-mexico th:nth-child(11), /* Valor carga */
-  .tabela-mexico td:nth-child(11) { width: 7%; }
+  .tabela-mexico th:nth-child(11), /* Contrato */
+  .tabela-mexico td:nth-child(11) { width: 6%; }
   
-  .tabela-mexico th:nth-child(12), /* Carga en el piso */
-  .tabela-mexico td:nth-child(12) { width: 6%; }
+  .tabela-mexico th:nth-child(12), /* Valor carga */
+  .tabela-mexico td:nth-child(12) { width: 7%; }
   
-  .tabela-mexico th:nth-child(13), /* Oficial */
+  .tabela-mexico th:nth-child(13), /* Carga en el piso */
   .tabela-mexico td:nth-child(13) { width: 6%; }
   
-  .tabela-mexico th:nth-child(14), /* Ações */
-  .tabela-mexico td:nth-child(14) { width: 5%; }
+  .tabela-mexico th:nth-child(14), /* Oficial */
+  .tabela-mexico td:nth-child(14) { width: 6%; }
+  
+  .tabela-mexico th:nth-child(15), /* Ações */
+  .tabela-mexico td:nth-child(15) { width: 5%; }
 
   .tabela-mexico th {
     background: #0ea5e9;
@@ -595,9 +598,11 @@
             <th>Origen</th>
             <th>Destino</th>
             <th>ID localizador</th>
+            <th>Contrato</th>
             <th>Valor carga</th>
             <th>Carga en el piso</th>
             <th>Oficial</th>
+            <th>Observación</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -614,9 +619,11 @@
             <td>{{ registro.origen }}</td>
             <td>{{ registro.destino }}</td>
             <td>{{ registro.id_localizador }}</td>
+            <td>{{ registro.contrato }}</td>
             <td>{{ registro.valor_carga|format_currency_mx }}</td>
             <td>{{ registro.carga_en_piso }}</td>
             <td>{{ registro.oficial }}</td>
+            <td class="tooltip-cell" data-tooltip="{{ registro.observacao|default:'Nenhuma observação' }}">{{ registro.observacao|default:'-' }}</td>
             <td>
               <div class="action-buttons">
                 <button class="btn btn-sm btn-warning action-btn" data-bs-toggle="modal" data-bs-target="#editarModal{{ registro.id }}" title="Editar">

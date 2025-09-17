@@ -5,6 +5,11 @@ class Sed(models.Model):
         (True, 'Sim'),
         (False, 'Não'),
     ]
+    
+    CONTRATO_CHOICES = [
+        ('Retornável', 'Retornável'),
+        ('Descartável', 'Descartável'),
+    ]
 
     data = models.DateField()
     numero_equipamento = models.CharField(max_length=100)
@@ -16,8 +21,10 @@ class Sed(models.Model):
     transportadora = models.CharField(max_length=100)
     placa = models.CharField(max_length=20)
     agente = models.CharField(max_length=100)
+    contrato = models.CharField(max_length=20, choices=CONTRATO_CHOICES, default='Retornável')
     carga_no_chao = models.BooleanField(choices=CARGA_CHOICES, default=False)
     valor_carga = models.DecimalField(max_digits=10, decimal_places=2)
+    observacao = models.TextField(max_length=500, blank=True, null=True, verbose_name="Observação")
 
     def __str__(self):
         return f"SED {self.numero_equipamento} - {self.cliente}"

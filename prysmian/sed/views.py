@@ -98,8 +98,8 @@ def exportar_excel_sed(request):
 
     # Cabeçalhos da tabela
     headers = [
-        'Data', 'Equipamento', 'Setor', 'Modalidade', 'Cliente', 'Origem', 'Destino', 
-        'Transportadora', 'Placa', 'Agente', 'Carga no Chão', 'Valor', 'Ações'
+        'Data', 'Equipamento', 'Contrato', 'Setor', 'Modalidade', 'Cliente', 'Origem', 'Destino', 
+        'Transportadora', 'Placa', 'Agente', 'Carga no Chão', 'Valor', 'Observação', 'Ações'
     ]
     ws.append(headers)
 
@@ -109,6 +109,7 @@ def exportar_excel_sed(request):
         row = [
             registro.data.strftime('%d/%m/%Y'),
             registro.numero_equipamento,
+            registro.contrato,
             registro.setor_insercao,
             registro.modalidade,
             registro.cliente,
@@ -119,6 +120,7 @@ def exportar_excel_sed(request):
             registro.agente,
             "Sim" if registro.carga_no_chao else "Não",
             registro.valor_carga,
+            registro.observacao or "",
             ""  # Aqui você pode adicionar dados adicionais, se necessário
         ]
         ws.append(row)

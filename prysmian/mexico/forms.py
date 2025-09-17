@@ -16,9 +16,11 @@ class MexicoForm(forms.ModelForm):
             'origen': forms.TextInput(attrs={'class': 'form-control'}),
             'destino': forms.TextInput(attrs={'class': 'form-control'}),
             'id_localizador': forms.TextInput(attrs={'class': 'form-control'}),
+            'contrato': forms.Select(choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável')], attrs={'class': 'form-control'}),
             'valor_carga': forms.NumberInput(attrs={'class': 'form-control'}),
             'carga_en_piso': forms.Select(choices=[('', 'Seleccione...'), ('Sí', 'Sí'), ('No', 'No')], attrs={'class': 'form-control'}),
             'oficial': forms.TextInput(attrs={'class': 'form-control'}),
+            'observacao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Digite observações adicionais...'}),
         }
 
     def clean(self):

@@ -266,7 +266,7 @@
     font-weight: normal !important; /* Garante que não fique em negrito */
   }
 
-  /* Larguras MUITO pequenas para caber todas as 18 colunas */
+  /* Larguras MUITO pequenas para caber todas as 19 colunas */
   .tabela-pdc th:nth-child(1), /* Data */
   .tabela-pdc td:nth-child(1) { width: 4.5%; }
   
@@ -279,47 +279,50 @@
   .tabela-pdc th:nth-child(4), /* Equipamento */
   .tabela-pdc td:nth-child(4) { width: 6.5%; }
   
-  .tabela-pdc th:nth-child(5), /* Setor */
-  .tabela-pdc td:nth-child(5) { width: 4%; }
+  .tabela-pdc th:nth-child(5), /* Contrato */
+  .tabela-pdc td:nth-child(5) { width: 5%; }
   
-  .tabela-pdc th:nth-child(6), /* Cliente */
-  .tabela-pdc td:nth-child(6) { width: 7%; }
+  .tabela-pdc th:nth-child(6), /* Setor */
+  .tabela-pdc td:nth-child(6) { width: 4%; }
   
-  .tabela-pdc th:nth-child(7), /* Origem */
-  .tabela-pdc td:nth-child(7) { width: 5.5%; }
+  .tabela-pdc th:nth-child(7), /* Cliente */
+  .tabela-pdc td:nth-child(7) { width: 7%; }
   
-  .tabela-pdc th:nth-child(8), /* Destino */
+  .tabela-pdc th:nth-child(8), /* Origem */
   .tabela-pdc td:nth-child(8) { width: 5.5%; }
   
-  .tabela-pdc th:nth-child(9), /* Transportadora */
-  .tabela-pdc td:nth-child(9) { width: 7%; }
+  .tabela-pdc th:nth-child(9), /* Destino */
+  .tabela-pdc td:nth-child(9) { width: 5.5%; }
   
-  .tabela-pdc th:nth-child(10), /* Placa */
-  .tabela-pdc td:nth-child(10) { width: 5%; }
+  .tabela-pdc th:nth-child(10), /* Transportadora */
+  .tabela-pdc td:nth-child(10) { width: 7%; }
   
-  .tabela-pdc th:nth-child(11), /* Agente */
-  .tabela-pdc td:nth-child(11) { width: 5.5%; }
+  .tabela-pdc th:nth-child(11), /* Placa */
+  .tabela-pdc td:nth-child(11) { width: 5%; }
   
-  .tabela-pdc th:nth-child(12), /* Carga no Chão */
-  .tabela-pdc td:nth-child(12) { width: 5%; }
+  .tabela-pdc th:nth-child(12), /* Agente */
+  .tabela-pdc td:nth-child(12) { width: 5.5%; }
   
-  .tabela-pdc th:nth-child(13), /* Valor */
-  .tabela-pdc td:nth-child(13) { width: 6%; }
+  .tabela-pdc th:nth-child(13), /* Carga no Chão */
+  .tabela-pdc td:nth-child(13) { width: 5%; }
   
-  .tabela-pdc th:nth-child(14), /* Krona */
-  .tabela-pdc td:nth-child(14) { width: 3%; }
+  .tabela-pdc th:nth-child(14), /* Valor */
+  .tabela-pdc td:nth-child(14) { width: 6%; }
   
-  .tabela-pdc th:nth-child(15), /* Golden */
+  .tabela-pdc th:nth-child(15), /* Krona */
   .tabela-pdc td:nth-child(15) { width: 3%; }
   
-  .tabela-pdc th:nth-child(16), /* Grupo Op. */
-  .tabela-pdc td:nth-child(16) { width: 4%; }
+  .tabela-pdc th:nth-child(16), /* Golden */
+  .tabela-pdc td:nth-child(16) { width: 3%; }
   
-  .tabela-pdc th:nth-child(17), /* Obs. */
-  .tabela-pdc td:nth-child(17) { width: 8%; }
+  .tabela-pdc th:nth-child(17), /* Grupo Op. */
+  .tabela-pdc td:nth-child(17) { width: 4%; }
   
-  .tabela-pdc th:nth-child(18), /* Ações */
-  .tabela-pdc td:nth-child(18) { width: 3%; }
+  .tabela-pdc th:nth-child(18), /* Obs. */
+  .tabela-pdc td:nth-child(18) { width: 8%; }
+  
+  .tabela-pdc th:nth-child(19), /* Ações */
+  .tabela-pdc td:nth-child(19) { width: 3%; }
 
   .tabela-pdc th {
     background: #f8fafc;
@@ -654,6 +657,7 @@
             <th>Carga Nº</th>
             <th>Modalidade</th>
             <th>Equipamento</th>
+            <th>Contrato</th>
             <th>Setor</th>
             <th>Cliente</th>
             <th>Origem</th>
@@ -677,6 +681,7 @@
             <td><strong>{{ carga.numero_carga }}</strong></td>
             <td>{{ carga.modalidade_carga }}</td>
             <td>{{ carga.numero_equipamento }}</td>
+            <td>{{ carga.contrato }}</td>
             <td>{{ carga.setor_insercao }}</td>
             <td class="tooltip-cell" data-tooltip="{{ carga.cliente }}">{{ carga.cliente }}</td>
             <td>{{ carga.origem }}</td>

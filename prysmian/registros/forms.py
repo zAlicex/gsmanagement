@@ -25,6 +25,12 @@ class CargaForm(forms.ModelForm):
         label="Golden"
     )
 
+    contrato = forms.ChoiceField(
+        choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável')],
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label="Contrato"
+    )
+
     class Meta:
         model = Carga
         fields = '__all__'

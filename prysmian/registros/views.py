@@ -104,7 +104,7 @@ def exportar_excel(request):
 
     # Cabeçalhos da tabela
     headers = [
-        'Data', 'Carga Nº', 'Modalidade', 'Equipamento', 'Setor', 'Cliente', 'Origem', 'Destino',
+        'Data', 'Carga Nº', 'Modalidade', 'Equipamento', 'Contrato', 'Setor', 'Cliente', 'Origem', 'Destino',
         'Transportadora', 'Placa', 'Agente', 'Carga no Chão', 'Valor', 'Krona', 'Golden', 'Grupo Op.', 'Obs.', 'Ações'
     ]
     ws.append(headers)
@@ -117,6 +117,7 @@ def exportar_excel(request):
             carga.numero_carga,
             carga.modalidade_carga,
             carga.numero_equipamento,
+            carga.contrato,
             carga.setor_insercao,
             carga.cliente,
             carga.origem,

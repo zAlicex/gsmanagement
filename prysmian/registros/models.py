@@ -1,6 +1,11 @@
 from django.db import models
 
 class Carga(models.Model):
+    CONTRATO_CHOICES = [
+        ('Retornável', 'Retornável'),
+        ('Descartável', 'Descartável'),
+    ]
+    
     data_insercao = models.DateField()
     hora = models.TimeField()
     numero_carga = models.CharField(max_length=100)
@@ -13,6 +18,7 @@ class Carga(models.Model):
     transportadora = models.CharField(max_length=100)
     placa = models.CharField(max_length=20)
     agente = models.CharField(max_length=50)
+    contrato = models.CharField(max_length=20, choices=CONTRATO_CHOICES, default='Retornável')
     carga_no_chao = models.CharField(max_length=50)
     valor_carga = models.DecimalField(max_digits=15, decimal_places=2)
     krona_ok = models.BooleanField(default=False)      
