@@ -16,7 +16,7 @@ class SedForm(forms.ModelForm):
             'transportadora': forms.TextInput(attrs={'class': 'form-control'}),
             'placa': forms.TextInput(attrs={'class': 'form-control'}),
             'agente': forms.TextInput(attrs={'class': 'form-control'}),
-            'contrato': forms.Select(choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável')], attrs={'class': 'form-control'}),
+            'contrato': forms.Select(choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável'), ('N/A', 'N/A')], attrs={'class': 'form-control'}),
             'valor_carga': forms.NumberInput(attrs={'class': 'form-control'}),
             'carga_no_chao': forms.Select(attrs={'class': 'form-control'}),
             'observacao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Digite observações adicionais...'}),

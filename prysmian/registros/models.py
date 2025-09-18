@@ -4,6 +4,7 @@ class Carga(models.Model):
     CONTRATO_CHOICES = [
         ('Retornável', 'Retornável'),
         ('Descartável', 'Descartável'),
+        ('N/A', 'N/A'),
     ]
     
     data_insercao = models.DateField()

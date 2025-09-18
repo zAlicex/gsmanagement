@@ -26,7 +26,7 @@ class CargaForm(forms.ModelForm):
     )
 
     contrato = forms.ChoiceField(
-        choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável')],
+        choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável'), ('N/A', 'N/A')],
         widget=forms.Select(attrs={'class': 'form-control'}),
         label="Contrato"
     )

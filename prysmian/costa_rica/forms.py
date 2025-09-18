@@ -16,7 +16,7 @@ class CostaRicaForm(forms.ModelForm):
             'origen': forms.TextInput(attrs={'class': 'form-control'}),
             'destino': forms.TextInput(attrs={'class': 'form-control'}),
             'id_localizador': forms.TextInput(attrs={'class': 'form-control'}),
-            'contrato': forms.Select(choices=[('', 'Seleccione...'), ('Retornável', 'Retornável'), ('Descartável', 'Descartável')], attrs={'class': 'form-control'}),
+            'contrato': forms.Select(choices=[('', 'Seleccione...'), ('Retornable', 'Retornable'), ('Desechable', 'Desechable'), ('N/A', 'N/A')], attrs={'class': 'form-control'}),
             'valor_carga': forms.NumberInput(attrs={'class': 'form-control'}),
             'carga_en_piso': forms.Select(choices=[('', 'Seleccione...'), ('Sí', 'Sí'), ('No', 'No')], attrs={'class': 'form-control'}),
             'oficial': forms.TextInput(attrs={'class': 'form-control'}),

@@ -4,8 +4,9 @@ from django.db import models
 
 class Mexico(models.Model):
     CONTRATO_CHOICES = [
-        ('Retornável', 'Retornável'),
-        ('Descartável', 'Descartável'),
+        ('Retornable', 'Retornable'),
+        ('Desechable', 'Desechable'),
+        ('N/A', 'N/A'),
     ]
     
     fecha_insercion = models.DateField(verbose_name="Fecha de la inserción")
@@ -18,7 +19,7 @@ class Mexico(models.Model):
     origen = models.CharField(max_length=100, verbose_name="Origen")
     destino = models.CharField(max_length=100, verbose_name="Destino")
     id_localizador = models.CharField(max_length=100, verbose_name="ID localizador")
-    contrato = models.CharField(max_length=20, choices=CONTRATO_CHOICES, verbose_name="Contrato", default='Retornável')
+    contrato = models.CharField(max_length=20, choices=CONTRATO_CHOICES, verbose_name="Contrato", default='Retornable')
     valor_carga = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor carga")
     carga_en_piso = models.CharField(max_length=100, verbose_name="Carga en el piso")
     oficial = models.CharField(max_length=100, verbose_name="Oficial")

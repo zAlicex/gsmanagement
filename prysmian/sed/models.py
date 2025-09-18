@@ -9,6 +9,7 @@ class Sed(models.Model):
     CONTRATO_CHOICES = [
         ('Retornável', 'Retornável'),
         ('Descartável', 'Descartável'),
+        ('N/A', 'N/A'),
     ]
 
     data = models.DateField()
