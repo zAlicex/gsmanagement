@@ -69,6 +69,11 @@ def editar_sed(request, sed_id):
         form = SedForm(request.POST, instance=registro)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Registro SED #{registro.numero_equipamento} foi atualizado com sucesso!')
+            return redirect('listar_sed')
+        else:
+            messages.error(request, 'Erro ao atualizar o registro. Verifique os dados e tente novamente.')
+            return redirect('listar_sed')
     return redirect('listar_sed')
 
 @login_required(login_url='/login/')

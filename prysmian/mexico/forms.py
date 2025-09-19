@@ -29,7 +29,8 @@ class MexicoForm(forms.ModelForm):
             value = cleaned_data.get(field)
             
             # Para todos os campos de texto, converte strings para maiúsculas
-            if isinstance(value, str):
+            # Exceto o campo contrato que tem choices específicos
+            if isinstance(value, str) and field != 'contrato':
                 cleaned_data[field] = value.upper()
 
         return cleaned_data

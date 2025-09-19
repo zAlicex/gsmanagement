@@ -69,6 +69,11 @@ def editar_costa_rica(request, costa_rica_id):
         form = CostaRicaForm(request.POST, instance=registro)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Registro Costa Rica #{registro.id_localizador} foi atualizado com sucesso!')
+            return redirect('listar_costa_rica')
+        else:
+            messages.error(request, 'Erro ao atualizar o registro. Verifique os dados e tente novamente.')
+            return redirect('listar_costa_rica')
     return redirect('listar_costa_rica')
 
 @login_required(login_url='/login/')

@@ -67,6 +67,11 @@ def editar_carga(request, carga_id):
         form = CargaForm(request.POST, instance=carga)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Carga #{carga.numero_carga} foi atualizada com sucesso!')
+            return redirect('tabela')
+        else:
+            messages.error(request, 'Erro ao atualizar a carga. Verifique os dados e tente novamente.')
+            return redirect('tabela')
     return redirect('tabela')
 
 @login_required(login_url='/login/')

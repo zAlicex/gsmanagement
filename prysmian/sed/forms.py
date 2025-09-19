@@ -35,7 +35,8 @@ class SedForm(forms.ModelForm):
                     cleaned_data[field] = False
 
             # Para outros campos, converte strings para maiúsculas
-            elif isinstance(value, str):
+            # Exceto o campo contrato que tem choices específicos
+            elif isinstance(value, str) and field != 'contrato':
                 cleaned_data[field] = value.upper()
 
         return cleaned_data

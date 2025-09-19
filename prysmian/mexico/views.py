@@ -69,6 +69,11 @@ def editar_mexico(request, mexico_id):
         form = MexicoForm(request.POST, instance=registro)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Registro Mexico #{registro.id_localizador} foi atualizado com sucesso!')
+            return redirect('listar_mexico')
+        else:
+            messages.error(request, 'Erro ao atualizar o registro. Verifique os dados e tente novamente.')
+            return redirect('listar_mexico')
     return redirect('listar_mexico')
 
 @login_required(login_url='/login/')

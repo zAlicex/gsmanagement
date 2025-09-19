@@ -59,7 +59,8 @@ class CargaForm(forms.ModelForm):
                     cleaned_data[field] = False
 
             # Para outros campos de texto, converte para maiúsculas
-            elif isinstance(value, str):
+            # Exceto o campo contrato que tem choices específicos
+            elif isinstance(value, str) and field != 'contrato':
                 cleaned_data[field] = value.upper()
 
         return cleaned_data
