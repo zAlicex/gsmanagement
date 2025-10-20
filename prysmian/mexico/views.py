@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.core.paginator import Paginator
 from .models import Mexico
 from .forms import MexicoForm
 from rest_framework import viewsets
@@ -41,11 +42,17 @@ def listar_mexico(request):
             Q(oficial__icontains=busca)
         )
 
+    # Configuração da paginação
+    paginator = Paginator(registros, 15)  # 15 registros por página
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     # Formulários por registro (para modais de edição)
-    formularios = {registro.id: MexicoForm(instance=registro) for registro in registros}
+    formularios = {registro.id: MexicoForm(instance=registro) for registro in page_obj}
 
     return render(request, 'mexico/tabela.html', {
-        'registros': registros,
+        'registros': page_obj,
+        'page_obj': page_obj,
         'formularios': formularios,
     })
 
